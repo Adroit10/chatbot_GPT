@@ -27,6 +27,12 @@ async def generic_greetings_handler(message: types.Message):
     if message.text.lower() in ['hi','hello']:
         await message.answer("Hi\nI am Echo Bot!\nPowered by aiogram")
 
+
+@dp.message()
+async def echo_handler(message: types.Message):
+    logging.info(f"Echoing message {message.text}")
+    await message.copy_to(chat_id=message.chat.id)
+    
 async def main():
     bot = Bot(token=API_TOKEN)
     await dp.start_polling(bot)
